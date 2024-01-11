@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Pokemons</title>
+</head>
+<body>
+
+<div id="pokemonList"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('http://127.0.0.1:8000/pokemons/random')
+        .then(response => response.json())
+        .then(data => {
+            displayPokemonList(data);
+        })
+        .catch(error => {
+            console.error('Une erreur s\'est produite lors de la récupération des données:', error);
+        });
+
+    function displayPokemonList(pokemonList) {
+        var pokemonListContainer = document.getElementById('pokemonList');
+
+        pokemonList.forEach(function(pokemonData) {
+            var pokemonElement = document.createElement('div');
+            pokemonElement.innerHTML = '<h2>' + pokemonData.pokemon + '</h2>' +
+                                      '<p>Stats: ' + pokemonData.stats.join(', ') + '</p>';
+            pokemonListContainer.appendChild(pokemonElement);
+        });
+    }
+});
+</script>
+
+</body>
+</html>
