@@ -20,7 +20,7 @@ app.include_router(pokemons.router, prefix="/pokemons")
 
 """
 from fastapi import FastAPI
-from .app.routers import trainers, pokemons, items
+from app.routers import trainers, pokemons, items
 
 
 app = FastAPI()
